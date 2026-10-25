@@ -1,0 +1,225 @@
+/* MapLibre renders markers and controls outside React, so these are plain (global) classes. */
+.branch-map {
+  position: absolute;
+  inset: 0;
+}
+
+.branch-map__notice {
+  position: absolute;
+  top: var(--space-4);
+  left: 50%;
+  max-width: 18rem;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--surface-raised);
+  box-shadow: var(--shadow-popover);
+  color: var(--text-secondary);
+  font: var(--text-callout);
+  text-align: center;
+  transform: translateX(-50%);
+}
+
+.maplibregl-map {
+  font: var(--text-footnote);
+}
+
+.maplibregl-ctrl-group {
+  overflow: hidden;
+  border-radius: var(--radius-sm) !important;
+  background: var(--surface-raised) !important;
+  box-shadow: var(--shadow-popover) !important;
+}
+
+.maplibregl-ctrl-group button + button {
+  border-top-color: var(--separator) !important;
+}
+
+.maplibregl-ctrl-attrib {
+  background: color-mix(in srgb, var(--surface), transparent 15%) !important;
+  color: var(--text-secondary);
+}
+
+.maplibregl-ctrl-attrib a {
+  color: var(--text-secondary);
+}
+
+/* A pin is a real button: focusable, labelled, and activated with Enter or Space. */
+.branch-pin {
+  width: 32px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.branch-pin__body {
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 2px solid #fff;
+  border-radius: 50% 50% 50% 0;
+  background: var(--accent);
+  box-shadow: 0 2px 6px rgb(0 0 0 / 0.3);
+  transform: translateX(-50%) rotate(-45deg);
+  transition:
+    transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 150ms ease;
+}
+
+.branch-pin__dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.branch-pin.is-highlighted {
+  z-index: 1;
+}
+
+.branch-pin.is-selected {
+  z-index: 2;
+}
+
+.branch-pin.is-closed .branch-pin__body {
+  background: #8e8e93;
+}
+
+/* Hover and selection grow the pin from its tip, where it touches the map. */
+.branch-pin.is-highlighted .branch-pin__body {
+  transform: translateX(-50%) rotate(-45deg) scale(1.15);
+}
+
+.branch-pin.is-selected .branch-pin__body {
+  background: var(--status-critical);
+  transform: translateX(-50%) rotate(-45deg) scale(1.3);
+}
+
+.branch-pin:active .branch-pin__body {
+  transform: translateX(-50%) rotate(-45deg) scale(0.92);
+}
+
+.branch-pin:focus-visible {
+  outline: none;
+}
+
+.branch-pin:focus-visible .branch-pin__body {
+  box-shadow:
+    0 0 0 3px var(--surface),
+    0 0 0 5px var(--focus-ring);
+}
+
+.branch-pin.is-clustered {
+  display: none;
+}
+
+/* Several pins that would overlap, shown as one with a count. */
+.branch-cluster {
+  display: grid;
+  place-items: center;
+  min-width: 34px;
+  height: 34px;
+  padding: 0 8px;
+  border: 2px solid #fff;
+  border-radius: 17px;
+  background: var(--accent);
+  box-shadow: 0 2px 6px rgb(0 0 0 / 0.3);
+  color: #fff;
+  font: var(--text-footnote);
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.branch-cluster.is-highlighted {
+  z-index: 1;
+  transform: scale(1.15);
+}
+
+.branch-cluster:active {
+  transform: scale(0.92);
+}
+
+.branch-cluster:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 3px var(--surface),
+    0 0 0 5px var(--focus-ring);
+}
+
+.user-dot {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  pointer-events: none;
+}
+
+.user-dot__core {
+  position: absolute;
+  inset: 4px;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  background: #0a84ff;
+  box-shadow: 0 1px 4px rgb(0 0 0 / 0.35);
+}
+
+.user-dot__pulse {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: rgb(10 132 255 / 0.3);
+  animation: user-pulse 2.4s ease-out infinite;
+}
+
+@keyframes user-pulse {
+  from {
+    transform: scale(0.6);
+    opacity: 1;
+  }
+  to {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .user-dot__pulse {
+    animation: none;
+  }
+
+  .branch-pin__body {
+    transition: none;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .branch-pin__body {
+    border-color: #1c1c1e;
+  }
+
+  /* MapLibre's control icons are dark glyphs; flip them on dark surfaces. */
+  :root:not([data-theme='light']) .maplibregl-ctrl-group .maplibregl-ctrl-icon {
+    filter: invert(1);
+  }
+}
+
+/* The same, when dark is chosen with the appearance toggle. */
+:root[data-theme='dark'] .branch-pin__body {
+  border-color: #1c1c1e;
+}
+
+:root[data-theme='dark'] .maplibregl-ctrl-group .maplibregl-ctrl-icon {
+  filter: invert(1);
+}
+
+/* Phones: controls sit below the floating search field. */
+@media (max-width: 55.99rem) {
+  .maplibregl-ctrl-top-right {
+    top: calc(env(safe-area-inset-top) + 76px);
+  }
+}
