@@ -1,0 +1,90 @@
+.button {
+  --button-bg: var(--surface-sunken);
+  --button-fg: var(--text-primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: var(--tap-target);
+  padding: 0 var(--space-5);
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: var(--button-bg);
+  color: var(--button-fg);
+  font: var(--text-headline);
+  font-size: 0.9375rem;
+  letter-spacing: var(--tracking-headline);
+  text-decoration: none;
+  white-space: nowrap;
+  user-select: none;
+  touch-action: manipulation;
+  transition:
+    transform var(--press-duration) ease-out,
+    background-color 150ms ease;
+}
+
+/* Feedback lands on press, not release. */
+.button:active:not(:disabled) {
+  transform: scale(0.97);
+  filter: brightness(0.94);
+}
+
+.button:disabled {
+  cursor: default;
+  opacity: 0.45;
+}
+
+.primary {
+  --button-bg: var(--accent);
+  --button-fg: var(--text-on-accent);
+}
+
+@media (hover: hover) {
+  .primary:hover:not(:disabled) {
+    --button-bg: var(--accent-hover);
+  }
+}
+
+@media (hover: hover) {
+  .secondary:hover:not(:disabled) {
+    background: color-mix(in srgb, var(--button-bg), var(--text-primary) 6%);
+  }
+}
+
+.plain {
+  --button-bg: transparent;
+  --button-fg: var(--accent);
+  padding: 0 var(--space-3);
+}
+
+@media (hover: hover) {
+  .plain:hover:not(:disabled) {
+    background: var(--accent-soft);
+  }
+}
+
+.small {
+  min-height: 36px;
+  padding: 0 var(--space-4);
+  font-size: 0.875rem;
+}
+
+.icon {
+  width: var(--tap-target);
+  padding: 0;
+}
+
+.spinner {
+  width: 1em;
+  height: 1em;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: spin 700ms linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

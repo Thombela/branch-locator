@@ -1,0 +1,24 @@
+.toggle {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: var(--tap-target);
+  height: var(--tap-target);
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-secondary);
+  transition:
+    background-color 150ms ease,
+    transform var(--press-duration) ease-out;
+}
+
+.toggle:hover {
+  background: var(--fill-hover);
+  color: var(--text-primary);
+}
+
+.toggle:active {
+  background: var(--fill-press);
+  transform: scale(0.94);
+}
