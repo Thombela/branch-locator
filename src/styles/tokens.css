@@ -1,0 +1,230 @@
+/*
+ * Design tokens. Components use these roles rather than raw colours, so light and dark,
+ * increased contrast and reduced transparency are all handled here.
+ */
+:root {
+  color-scheme: light dark;
+
+  /* Type: the system font, which has optical sizing built in. */
+  --font-sans:
+    system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, sans-serif;
+  --font-rounded: ui-rounded, 'SF Pro Rounded', var(--font-sans);
+
+  /* Size, leading and tracking travel together: large text tightens, small text opens up. */
+  --text-hero: 600 clamp(2.25rem, 1.6rem + 2.6vw, 3.25rem) / 1.05 var(--font-sans);
+  --tracking-hero: -0.025em;
+  --text-title: 700 clamp(1.625rem, 1.4rem + 1vw, 2rem) / 1.12 var(--font-sans);
+  --tracking-title: -0.02em;
+  --text-headline: 600 1.0625rem / 1.3 var(--font-sans);
+  --tracking-headline: -0.01em;
+  --text-body: 400 1rem / 1.5 var(--font-sans);
+  --text-callout: 400 0.9375rem / 1.4 var(--font-sans);
+  --text-footnote: 400 0.8125rem / 1.35 var(--font-sans);
+  --tracking-footnote: 0.005em;
+  --text-caption: 500 0.75rem / 1.3 var(--font-sans);
+  --tracking-caption: 0.02em;
+
+  /* Spacing on a 4px rhythm, in rem so layout scales with the user's text size. */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-pill: 999px;
+
+  --page-max: 72rem;
+  --gutter: clamp(1rem, 0.5rem + 2vw, 2rem);
+  --tap-target: 44px;
+
+  /* Light appearance */
+  --bg: #f5f5f7;
+  --surface: #ffffff;
+  --surface-raised: #ffffff;
+  --surface-sunken: #ececf0;
+  --fill-hover: rgb(0 0 0 / 0.04);
+  --fill-press: rgb(0 0 0 / 0.08);
+  --separator: rgb(60 60 67 / 0.14);
+  --separator-strong: rgb(60 60 67 / 0.28);
+
+  --text-primary: #1d1d1f;
+  --text-secondary: #5f5f66;
+  --text-tertiary: #6e6e73;
+  --text-on-accent: #ffffff;
+
+  --accent: #0066cc;
+  --accent-hover: #0059b3;
+  --accent-soft: rgb(0 102 204 / 0.1);
+  --focus-ring: #0071e3;
+
+  /* Status colours are only for state, and always come with an icon and a label. */
+  --status-good: #146c2e;
+  --status-good-soft: rgb(20 108 46 / 0.12);
+  --status-warning: #9a5b00;
+  --status-warning-fill: #e08a00;
+  --status-warning-soft: rgb(224 138 0 / 0.14);
+  --status-critical: #c4281c;
+  --status-critical-soft: rgb(196 40 28 / 0.1);
+
+  /* Tested categorical palette in a fixed order (see Colour in the README). */
+  --cat-1: #2a78d6;
+  --cat-2: #eb6834;
+  --cat-3: #1baf7a;
+  --cat-4: #eda100;
+  --cat-5: #e87ba4;
+  --cat-6: #6250d6;
+  --cat-other: #8e8e93;
+
+  --chart-bar: var(--cat-1);
+  --chart-grid: rgb(60 60 67 / 0.1);
+  --chart-reference: rgb(60 60 67 / 0.45);
+
+  /* Materials: translucent chrome lets content scroll underneath. */
+  --material-chrome: rgb(245 245 247 / 0.72);
+  --material-chrome-border: rgb(0 0 0 / 0.08);
+  --material-blur: saturate(180%) blur(20px);
+  --material-sheet: rgb(255 255 255 / 0.86);
+  --scrim: rgb(0 0 0 / 0.32);
+
+  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.04), 0 2px 8px rgb(0 0 0 / 0.04);
+  --shadow-sheet: 0 -8px 40px rgb(0 0 0 / 0.16);
+  --shadow-popover: 0 8px 28px rgb(0 0 0 / 0.14), 0 1px 3px rgb(0 0 0 / 0.08);
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --press-duration: 100ms;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --bg: #000000;
+    --surface: #1c1c1e;
+    --surface-raised: #2c2c2e;
+    --surface-sunken: #121214;
+    --fill-hover: rgb(255 255 255 / 0.06);
+    --fill-press: rgb(255 255 255 / 0.1);
+    --separator: rgb(84 84 88 / 0.5);
+    --separator-strong: rgb(84 84 88 / 0.8);
+
+    --text-primary: #f5f5f7;
+    --text-secondary: #aeaeb2;
+    --text-tertiary: #8e8e93;
+
+    --accent: #4da3ff;
+    --accent-hover: #6cb4ff;
+    --accent-soft: rgb(77 163 255 / 0.16);
+    --focus-ring: #4da3ff;
+    --text-on-accent: #00172e;
+
+    --status-good: #4cc76b;
+    --status-good-soft: rgb(76 199 107 / 0.16);
+    --status-warning: #f0a830;
+    --status-warning-fill: #f0a830;
+    --status-warning-soft: rgb(240 168 48 / 0.16);
+    --status-critical: #ff6961;
+    --status-critical-soft: rgb(255 105 97 / 0.16);
+
+    --cat-1: #3987e5;
+    --cat-2: #d95926;
+    --cat-3: #199e70;
+    --cat-4: #c98500;
+    --cat-5: #d55181;
+    --cat-6: #9085e9;
+    --cat-other: #8e8e93;
+
+    --chart-grid: rgb(235 235 245 / 0.1);
+    --chart-reference: rgb(235 235 245 / 0.45);
+
+    --material-chrome: rgb(22 22 24 / 0.72);
+    --material-sheet: rgb(28 28 30 / 0.86);
+    --material-chrome-border: rgb(255 255 255 / 0.08);
+    --scrim: rgb(0 0 0 / 0.55);
+
+    --shadow-card: none;
+    --shadow-sheet: 0 -8px 40px rgb(0 0 0 / 0.6);
+    --shadow-popover: 0 8px 28px rgb(0 0 0 / 0.5);
+  }
+}
+
+/* Dark chosen with the appearance toggle, whatever the OS uses. */
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #000000;
+  --surface: #1c1c1e;
+  --surface-raised: #2c2c2e;
+  --surface-sunken: #121214;
+  --fill-hover: rgb(255 255 255 / 0.06);
+  --fill-press: rgb(255 255 255 / 0.1);
+  --separator: rgb(84 84 88 / 0.5);
+  --separator-strong: rgb(84 84 88 / 0.8);
+
+  --text-primary: #f5f5f7;
+  --text-secondary: #aeaeb2;
+  --text-tertiary: #8e8e93;
+
+  --accent: #4da3ff;
+  --accent-hover: #6cb4ff;
+  --accent-soft: rgb(77 163 255 / 0.16);
+  --focus-ring: #4da3ff;
+  --text-on-accent: #00172e;
+
+  --status-good: #4cc76b;
+  --status-good-soft: rgb(76 199 107 / 0.16);
+  --status-warning: #f0a830;
+  --status-warning-fill: #f0a830;
+  --status-warning-soft: rgb(240 168 48 / 0.16);
+  --status-critical: #ff6961;
+  --status-critical-soft: rgb(255 105 97 / 0.16);
+
+  --cat-1: #3987e5;
+  --cat-2: #d95926;
+  --cat-3: #199e70;
+  --cat-4: #c98500;
+  --cat-5: #d55181;
+  --cat-6: #9085e9;
+  --cat-other: #8e8e93;
+
+  --chart-grid: rgb(235 235 245 / 0.1);
+  --chart-reference: rgb(235 235 245 / 0.45);
+
+  --material-chrome: rgb(22 22 24 / 0.72);
+  --material-sheet: rgb(28 28 30 / 0.86);
+  --material-chrome-border: rgb(255 255 255 / 0.08);
+  --scrim: rgb(0 0 0 / 0.55);
+
+  --shadow-card: none;
+  --shadow-sheet: 0 -8px 40px rgb(0 0 0 / 0.6);
+  --shadow-popover: 0 8px 28px rgb(0 0 0 / 0.5);
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  :root:is([data-theme], :not([data-theme])) {
+    --material-chrome: var(--bg);
+    --material-sheet: var(--surface);
+    --material-blur: none;
+  }
+}
+
+@media (prefers-contrast: more) {
+  :root:is([data-theme], :not([data-theme])) {
+    --separator: var(--text-tertiary);
+    --separator-strong: var(--text-secondary);
+    --text-secondary: var(--text-primary);
+    --material-chrome: var(--bg);
+    --material-sheet: var(--surface);
+    --material-blur: none;
+    --material-chrome-border: var(--text-secondary);
+  }
+}
