@@ -1,0 +1,59 @@
+.skip {
+  position: absolute;
+  top: var(--space-2);
+  left: var(--space-2);
+  z-index: 2000;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-sm);
+  background: var(--surface-raised);
+  box-shadow: var(--shadow-popover);
+  transform: translateY(-200%);
+}
+
+.skip:focus {
+  transform: none;
+}
+
+/* On phones the map gets the whole screen; the brand bar only appears on larger screens. */
+.topBar {
+  display: none;
+}
+
+@media (min-width: 56rem) {
+  .topBar {
+    position: relative;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    height: 56px;
+    padding: 0 var(--space-5);
+    border-bottom: 1px solid var(--separator);
+    background: var(--surface);
+  }
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font: var(--text-headline);
+  letter-spacing: var(--tracking-headline);
+}
+
+.logo {
+  flex: none;
+  width: auto;
+  height: 17px;
+}
+
+.themeToggle {
+  margin-left: auto;
+}
+
+/* A hairline divides the bank's logo from the product name. */
+.brandName {
+  padding-left: var(--space-2);
+  border-left: 1px solid var(--separator-strong);
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
