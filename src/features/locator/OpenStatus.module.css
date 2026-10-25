@@ -1,0 +1,36 @@
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font: var(--text-footnote);
+}
+
+.label {
+  font-weight: 600;
+}
+
+.open .label {
+  color: var(--status-good);
+}
+
+.closed .label {
+  color: var(--status-critical);
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+
+.open .dot {
+  background: var(--status-good);
+}
+
+.closed .dot {
+  background: var(--status-critical);
+}
+
+.detail {
+  color: var(--text-secondary);
+}

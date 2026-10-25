@@ -1,0 +1,133 @@
+.page {
+  position: relative;
+  height: 100dvh;
+}
+
+.map {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  /* Keep the map's own layers and controls beneath the sheet and search. */
+  isolation: isolate;
+  background: var(--surface-sunken);
+}
+
+.panelInner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.searchArea {
+  position: absolute;
+  top: calc(env(safe-area-inset-top) + 76px);
+  right: 0;
+  left: 0;
+  width: fit-content;
+  margin: 0 auto;
+  z-index: 450;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 40px;
+  padding: 0 var(--space-4);
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: var(--surface-raised);
+  box-shadow: var(--shadow-popover);
+  color: var(--accent);
+  font: var(--text-callout);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.floatingSearch {
+  position: absolute;
+  top: calc(env(safe-area-inset-top) + var(--space-3));
+  right: var(--space-3);
+  left: var(--space-3);
+  z-index: 600;
+  padding: var(--space-2);
+  border-radius: var(--radius-md);
+  background: var(--material-sheet);
+  -webkit-backdrop-filter: var(--material-blur);
+  backdrop-filter: var(--material-blur);
+  box-shadow: var(--shadow-popover);
+}
+
+/* Phones have no top bar, so the appearance toggle sits beside the search. */
+.floatingSearch {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.floatingSearch > :first-child {
+  flex: 1;
+  min-width: 0;
+}
+
+.floatingToggle {
+  background: var(--surface-sunken);
+}
+
+.sheetTitle {
+  font: var(--text-headline);
+  letter-spacing: var(--tracking-headline);
+}
+
+.sheetSubtitle {
+  color: var(--text-secondary);
+  font: var(--text-footnote);
+}
+
+.notice {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  background: var(--status-warning-soft);
+  font: var(--text-footnote);
+}
+
+.notice button {
+  flex: none;
+  margin-left: auto;
+  border: 0;
+  background: none;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.view {
+  will-change: transform;
+}
+
+/* Desktop: list panel beside the map. */
+@media (min-width: 56rem) {
+  .page {
+    display: grid;
+    grid-template-columns: 26rem minmax(0, 1fr);
+    height: calc(100dvh - 56px);
+  }
+
+  .map {
+    position: relative;
+    inset: auto;
+  }
+
+  .panel {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    min-height: 0;
+    padding: var(--space-5);
+    overflow-y: auto;
+    border-right: 1px solid var(--separator);
+    background: var(--surface);
+  }
+
+  .searchArea {
+    top: var(--space-4);
+  }
+}

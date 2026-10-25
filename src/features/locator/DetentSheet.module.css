@@ -1,0 +1,54 @@
+/* Mobile: a non-modal sheet over the map. There's no scrim, so the map stays usable. */
+.sheet {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 500;
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  background: var(--material-sheet);
+  -webkit-backdrop-filter: var(--material-blur);
+  backdrop-filter: var(--material-blur);
+  box-shadow: var(--shadow-sheet);
+  will-change: transform;
+}
+
+.handle {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: var(--space-2) 0 var(--space-1);
+  border: 0;
+  background: transparent;
+  touch-action: none;
+  cursor: grab;
+}
+
+.handle:active {
+  cursor: grabbing;
+}
+
+.grabber {
+  width: 36px;
+  height: 5px;
+  border-radius: var(--radius-pill);
+  background: var(--separator-strong);
+}
+
+.header {
+  flex: none;
+  padding: 0 var(--space-5) var(--space-3);
+  touch-action: none;
+}
+
+.content {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 0 var(--space-5);
+}
